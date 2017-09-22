@@ -5,14 +5,58 @@ services:
     image: jwilder/nginx-proxy
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
+      - "./nginx/vhost.d:/etc/nginx/vhost.d"
+      - "./nginx/html:/usr/share/nginx/html"
+      - "./nginx/certs:/etc/nginx/certs"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
     label:
       io.rancher.container.pull_image: always
+      io.rancher.sidekicks: data-volume, test2
+    volumes_from:
+    - data-volume
+
+  data-volume:
+    tty: true
+    command:
+    - cat
+    image: alpine
+    stdin_open: true
     
+  nginx:
+    image: nginx
+    links:
+      - whoami
+    volumes:
+      - "./etc/nginx/conf.d/:/etc/nginx/conf.d/"
+    environment:
+      VIRTUAL_HOST: rancherserver.westcentralus.cloudapp.azure.com
+      LETSENCRYPT_HOST: rancherserver.westcentralus.cloudapp.azure.com
+      LETSENCRYPT_EMAIL: steve.neighbour.com
+    label:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: data-volume, test2
+    volumes_from:
+    - data-volume
+      
   whoami:
     image: jwilder/whoami
     environment:
-      - VIRTUAL_HOST=rancherserver.westcentralus.cloudapp.azure.com/
+      - VIRTUAL_HOST=rancherserver.westcentralus.cloudapp.azure.com
     label:
       io.rancher.container.pull_image: always
+      io.rancher.sidekicks: data-volume, test2
+    volumes_from:
+    - data-volume
+      
+
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    label:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: data-volume, test2
+    volumes_from:
+    - data-volume
