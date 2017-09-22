@@ -7,8 +7,12 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
-
+    label:
+      io.rancher.container.pull_image: always
+    
   whoami:
     image: jwilder/whoami
     environment:
       - VIRTUAL_HOST=rancherserver.westcentralus.cloudapp.azure.com/
+    label:
+      io.rancher.container.pull_image: always
