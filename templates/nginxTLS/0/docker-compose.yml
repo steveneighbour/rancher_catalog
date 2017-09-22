@@ -21,7 +21,7 @@ services:
   data-volume:
     tty: true
     image: alpine
-   stdin_open: true
+    stdin_open: true
 
   nginx:
     image: nginx
