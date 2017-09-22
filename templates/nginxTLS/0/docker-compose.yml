@@ -11,7 +11,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - nginx-data-external:/etc/nginx
-    #command: git clone https://bf101f78fc7bbe817c2027db8db443640ef19cbb:x-oauth-basic@github.com/steveneighbour/docker-nginx-letsencrypt-sample.git
+    command: git clone https://bf101f78fc7bbe817c2027db8db443640ef19cbb:x-oauth-basic@github.com/steveneighbour/docker-nginx-letsencrypt-sample.git
       
 
   nginx-gen:
@@ -20,7 +20,7 @@ services:
     container_name: nginx-gen
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
-      - nginx-data-external:/etc/docker-gen
+      - nginx-data-external:/etc/docker-gen/templates/nginx.tmpl
     entrypoint: /usr/local/bin/docker-gen -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
       
 #  letsencrypt-nginx-proxy-companion:
