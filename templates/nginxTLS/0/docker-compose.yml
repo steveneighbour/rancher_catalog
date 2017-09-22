@@ -11,7 +11,7 @@ services:
       - "./nginx/html:/usr/share/nginx/html"
       - "./nginx/certs:/etc/nginx/certs"
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
-    label:
+    labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: data-volume, test2
     volumes_from:
@@ -34,7 +34,7 @@ services:
       VIRTUAL_HOST: rancherserver.westcentralus.cloudapp.azure.com
       LETSENCRYPT_HOST: rancherserver.westcentralus.cloudapp.azure.com
       LETSENCRYPT_EMAIL: steve.neighbour.com
-    label:
+    labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: data-volume, test2
     volumes_from:
@@ -44,7 +44,7 @@ services:
     image: jwilder/whoami
     environment:
       - VIRTUAL_HOST=rancherserver.westcentralus.cloudapp.azure.com
-    label:
+    labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: data-volume, test2
     volumes_from:
@@ -55,7 +55,7 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    label:
+    labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: data-volume, test2
     volumes_from:
