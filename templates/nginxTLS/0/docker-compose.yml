@@ -6,11 +6,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
- #  volumes:
-      #- "./nginx/vhost.d:/etc/nginx/vhost.d"
-      #- "./nginx/html:/usr/share/nginx/html"
-      #- "./nginx/certs:/etc/nginx/certs"
-  #    - "/var/run/docker.sock:/tmp/docker.sock"
+   volumes:
+      - "/etc/nginx/vhost.d"
+      - "/usr/share/nginx/html"
+      - "/var/run/docker.sock:/tmp/docker.sock"
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: data-volume, nginx, whoami
@@ -28,8 +27,8 @@ services:
     image: nginx
     links:
       - whoami
-  #  volumes:
-     # - "./etc/nginx/conf.d/:/etc/nginx/conf.d/"
+    volumes:
+      - "/etc/nginx/conf.d/"
     environment:
       VIRTUAL_HOST: rancherserver.westcentralus.cloudapp.azure.com
  #     LETSENCRYPT_HOST: rancherserver.westcentralus.cloudapp.azure.com
