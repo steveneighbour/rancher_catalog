@@ -2,7 +2,6 @@ version: "2"
 
 services:
   nginx:
-    command: git clone https://bf101f78fc7bbe817c2027db8db443640ef19cbb:x-oauth-basic@github.com/steveneighbour/docker-nginx-letsencrypt-sample.git
     restart: always
     image: nginx
     container_name: nginx
@@ -14,6 +13,8 @@ services:
       - "/etc/nginx/vhost.d"
       - "/usr/share/nginx/html"
       - "/etc/nginx/certs"
+    #command: git clone https://bf101f78fc7bbe817c2027db8db443640ef19cbb:x-oauth-basic@github.com/steveneighbour/docker-nginx-letsencrypt-sample.git
+
 
   #nginx-gen:
   #  restart: always
