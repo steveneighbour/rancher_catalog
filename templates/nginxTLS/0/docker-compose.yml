@@ -7,10 +7,8 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
-    network_mode: "host"
 
   whoami:
     image: jwilder/whoami
     environment:
-      - VIRTUAL_HOST=whoami.local
-    network_mode: "host"
+      - VIRTUAL_HOST=rancherserver.westcentralus.cloudapp.azure.com/
