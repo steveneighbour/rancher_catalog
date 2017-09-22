@@ -1,8 +1,8 @@
-name: # Name of the Catalog Entry
-description: |
+name: nginxTLS # Name of the Catalog Entry
+description: Provides a mechanism to deploy nginx, with TLS provided by LetsEncrypt + reverse proxying
   # Description of the Catalog Entry
-version: # Version of the Catalog to be used
-category: # Category to be used for searching catalog entries
-maintainer: # The maintainer of the catalog entry
+version: 1# Version of the Catalog to be used
+category: Load Balancing # Category to be used for searching catalog entries
+maintainer: Steve # The maintainer of the catalog entry
 license: # The license
 projectURL: # A URL related to the catalog entry
