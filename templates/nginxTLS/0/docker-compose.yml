@@ -13,14 +13,14 @@ services:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: data-volume, test2
+      io.rancher.sidekicks: data-volume, nginx, whoami, letsencrypt-nginx-proxy-companion
     volumes_from:
-    - data-volume
+      - data-volume
 
   data-volume:
     tty: true
     command:
-    - cat
+      - cat
     image: alpine
     stdin_open: true
     
@@ -36,9 +36,9 @@ services:
       LETSENCRYPT_EMAIL: steve.neighbour.com
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: data-volume, test2
+      io.rancher.sidekicks: data-volume, nginx, whoami, letsencrypt-nginx-proxy-companion
     volumes_from:
-    - data-volume
+      - data-volume
       
   whoami:
     image: jwilder/whoami
@@ -46,9 +46,9 @@ services:
       - VIRTUAL_HOST=rancherserver.westcentralus.cloudapp.azure.com
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: data-volume, test2
+      io.rancher.sidekicks: data-volume, nginx, whoami, letsencrypt-nginx-proxy-companion
     volumes_from:
-    - data-volume
+      - data-volume
       
 
   letsencrypt-nginx-proxy-companion:
@@ -57,6 +57,6 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.sidekicks: data-volume, test2
+      io.rancher.sidekicks: data-volume, nginx, whoami, letsencrypt-nginx-proxy-companion
     volumes_from:
-    - data-volume
+      - data-volume
