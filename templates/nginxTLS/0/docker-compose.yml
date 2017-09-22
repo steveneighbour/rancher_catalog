@@ -21,7 +21,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
       - nginx-data-external:/etc/docker-gen
-    #entrypoint: /usr/local/bin/docker-gen -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    entrypoint: /usr/local/bin/docker-gen -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
       
   letsencrypt-nginx-proxy-companion:
     restart: always
@@ -63,4 +63,4 @@ services:
 volumes:
   nginx-data-external:
     driver: local
-    external: false # Without this definition, a stack scoped volume will be created. 
+    #external: true # Without this definition, a stack scoped volume will be created. 
